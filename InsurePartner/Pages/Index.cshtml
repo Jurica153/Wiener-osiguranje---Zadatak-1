@@ -1,0 +1,125 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Lista Partnera";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between mb-4">
+        <h2>Lista partnera</h2>
+        <div>
+            <a asp-page="/CreatePartner" class="btn btn-primary">Unos Novog Partnera</a>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#policyModal">Unos Police</button>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Puno ime</th>
+                    <th>Broj partnera</th>
+                    <th>OIB</th>
+                    <th>Tip partnera</th>
+                    <th>Vrijeme zapisa (UTC)</th>
+                    <th>Strani partner</th>
+                    <th>Spol</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model.Partners)
+                {
+                    // Provjera uvjeta za zvjezdicu (Dapper upit vraća PolicyCount i TotalAmount)
+                    bool hasAsterisk = p.PolicyCount > 5 || p.TotalAmount > 5000;
+
+                    // Provjera je li to partner koji je upravo dodan (iz URL parametra)
+                    bool isNew = Model.NewPartnerId == p.Id;
+
+                    <tr class="@(isNew ? "table-success font-weight-bold" : "")"
+                        style="cursor: pointer;"
+                        onclick="postaviSifru('@p.ExternalCode')">
+
+                        <td>@(hasAsterisk ? "* " : "") @p.FirstName @p.LastName</td>
+                        <td>@p.PartnerNumber</td>
+                        <td>@(string.IsNullOrEmpty(p.CroatianPIN) ? "-" : p.CroatianPIN)</td>
+                        <td>@(p.PartnerTypeId == 1 ? "Personal" : "Legal")</td>
+                        <td>@p.CreatedAtUtc.ToString("dd.MM.yyyy HH:mm")</td>
+                        <td>@(p.IsForeign ? "Da" : "Ne")</td>
+                        <td>@p.Gender</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="policyModal" tabindex="-1" aria-labelledby="policyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="policyModalLabel">Unos nove police osiguranja</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form method="post" asp-page-handler="CreatePolicy">
+                <div class="modal-body">
+
+                    <div class="form-group mb-3">
+                        <label for="PartnerExternalCode" class="font-weight-bold">Vanjska šifra partnera *</label>
+                        <input type="text" asp-for="PartnerExternalCode" id="PartnerExternalCode" class="form-control" required />
+                        <small class="form-text text-muted">Klikom na partnera u tablici ova šifra se automatski popunjava i otvara modal.</small>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="NewPolicyNumber" class="font-weight-bold">Broj police *</label>
+                        <input type="text" asp-for="NewPolicyNumber" id="NewPolicyNumber" class="form-control" placeholder="Npr. POL-12345" required />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="NewPolicyAmount" class="font-weight-bold">Iznos police (€) *</label>
+                        <input type="number" step="0.01" asp-for="NewPolicyAmount" id="NewPolicyAmount" class="form-control" placeholder="0.00" required />
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+                    <button type="submit" class="btn btn-success">Spremi policu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 1. Funkcija koja se okida kada klikneš na REDAK u tablici
+    function postaviSifru(eksternaSifra) {
+        // Prvo upišemo šifru partnera
+        var inputPolje = document.getElementById('PartnerExternalCode');
+        if (inputPolje) {
+            inputPolje.value = eksternaSifra;
+        }
+
+        // Zatim otvorimo modal
+        var modalElement = document.getElementById('policyModal');
+        if (modalElement) {
+            var mojModal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+            mojModal.show();
+        }
+    }
+
+    // 2. Logika koja automatski ČISTI MODAL kada se on zatvori
+    document.addEventListener("DOMContentLoaded", function () {
+        var modalElement = document.getElementById('policyModal');
+
+        if (modalElement) {
+            modalElement.addEventListener('hidden.bs.modal', function () {
+                // Pronađi formu unutar modala i resetiraj sva polja na prazno
+                var forma = modalElement.querySelector('form');
+                if (forma) {
+                    forma.reset();
+                }
+            });
+        }
+    });
+</script>

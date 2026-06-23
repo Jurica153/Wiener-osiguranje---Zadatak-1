@@ -1,0 +1,101 @@
+﻿@page
+@model InsurePartner.Pages.CreatePartnerModel
+@{
+	ViewData["Title"] = "Unos Novog Partnera";
+}
+
+<div class="container mt-4">
+	<h2>Unos novog partnera</h2>
+	<hr />
+
+	<form method="post" class="needs-validation" novalidate>
+		<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+		<div class="row">
+			<div class="form-group col-md-6">
+				<label asp-for="NoviPartner.FirstName" class="font-weight-bold">Ime *</label>
+				<input asp-for="NoviPartner.FirstName" class="form-control" minlength="2" maxlength="255" required></input>
+				<span asp-validation-for="NoviPartner.FirstName" class="text-danger"></span>
+			</div>
+
+			<div class="form-group col-md-6">
+				<label asp-for="NoviPartner.LastName" class="font-weight-bold">Prezime *</label>
+				<input asp-for="NoviPartner.LastName" class="form-control" minlength="2" maxlength="255" required />
+				<span asp-validation-for="NoviPartner.LastName" class="text-danger"></span>
+			</div>
+		</div>
+
+		<div class="form-group" col-md-6>
+			<label asp-for="NoviPartner.Address" class="font-weight-bold">Adresa</label>
+			<input asp-for="NoviPartner.Address" class="form-control /"></input>
+			<span asp-validation-for="NoviPartner.Address" class="text-danger"></span>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-md-6">
+				<label asp-for="NoviPartner.PartnerNumber" class="font-weight-bold">Broj partnera *</label>
+				<input asp-for="NoviPartner.PartnerNumber" class="form-control" pattern=".{20,20}" title="Mora sadržavati točno 20 znamenki" required></input>
+				<span asp-validation-for="NoviPartner.PartnerNumber" class="text-danger"></span>
+			</div>
+
+			<div class="form-group col-md-6">
+				<label asp-for="NoviPartner.CroatianPIN" class="font-weight-bold">OIB</label>
+				<input asp-for="NoviPartner.CroatianPIN" class="form-control" maxlength="11"></input>
+				<span asp-validation-for="NoviPartner.CroatianPIN" class="text-danger"></span>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-md-4">
+				<label asp-for="NoviPartner.PartnerTypeId" class="font-weight-bold">Tip partnera *</label>
+				<select asp-for="NoviPartner.PartnerTypeId" class="form-control" required>
+					<option value="">-- Odaberi --</option>
+					<option value="1">Personal</option>
+					<option value="2">Legal</option>
+				</select>
+				<span asp-validation-for="NoviPartner.PartnerTypeId" class="text-danger"></span>
+			</div>
+
+			<div class="form-group col-md-4">
+				<label asp-for="NoviPartner.Gender" class="font-weight-bold">Spol *</label>
+				<select asp-for="NoviPartner.Gender" class="form-control" required>
+					<option value="">-- Odaberi --</option>
+					<option value="M">M</option>
+					<option value="F">F</option>
+					<option value="N">N</option>
+				</select>
+				<span asp-validation-for="NoviPartner.Gender" class="text-danger"></span>
+			</div>
+
+			<div class="form-group col-md-4 align-self-end text-center pb-3">
+				<div class="form-check">
+					<input asp-for="NoviPartner.IsForeign" class="form-check-input" type="checkbox"></input>
+					<label asp-for="NoviPartner.IsForeign" class="form-check-label font-weight-bold">Strani partner</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-md-6">
+				<label asp-for="NoviPartner.CreatedByUser" class="font-weight-bold">Korisnički  Email *</label>
+				<input asp-for="NoviPartner.CreatedByUser" type="email" class="form-control" maxlength="255" required></input>
+				<span asp-validation-for="NoviPartner.CreatedByUser" class="text-danger"></span>
+			</div>
+
+			<div class="form-group col-md-6">
+				<label asp-for="NoviPartner.ExternalCode" class="font-weight-bold">Vanjska šifra *</label>
+				<input asp-for="NoviPartner.ExternalCode" class="form-control" minlength="10" maxlength="20" required></input>
+				<span asp-validation-for="NoviPartner.ExternalCode" class="text-danger"></span>
+			</div>
+		</div>
+
+		<div class="mt-4 mb-5">
+			<button type="submit" class="btn btn-success btn-lg">Spremi partnera</button>
+			<a asp-page="/Index" class="btn btn-secondary btn-lg ml-2">Odustani</a>
+		</div>
+	</form>	
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}
