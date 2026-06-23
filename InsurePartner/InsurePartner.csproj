@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Slike\Lista Partnera.png" />
+    <None Remove="Slike\Unos Nove Police Osiguranja.png" />
+    <None Remove="Slike\Unos Novog Partnera.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.79" />
     <PackageReference Include="Markdown" Version="2.2.1" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.1" />
