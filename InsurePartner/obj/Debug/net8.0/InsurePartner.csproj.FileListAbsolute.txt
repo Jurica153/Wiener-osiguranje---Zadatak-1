@@ -58,6 +58,7 @@ C:\Users\juric\source\repos\InsurePartner\InsurePartner\obj\Debug\net8.0\InsureP
 C:\Users\juric\source\repos\InsurePartner\InsurePartner\obj\Debug\net8.0\InsurePartner.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\juric\source\repos\InsurePartner\InsurePartner\obj\Debug\net8.0\InsurePartner.RazorAssemblyInfo.cache
 C:\Users\juric\source\repos\InsurePartner\InsurePartner\obj\Debug\net8.0\InsurePartner.RazorAssemblyInfo.cs
+C:\Users\juric\source\repos\InsurePartner\InsurePartner\obj\Debug\net8.0\InsurePartner.sourcelink.json
 C:\Users\juric\source\repos\InsurePartner\InsurePartner\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\juric\source\repos\InsurePartner\InsurePartner\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\juric\source\repos\InsurePartner\InsurePartner\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
