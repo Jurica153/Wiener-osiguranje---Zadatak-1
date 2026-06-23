@@ -18,7 +18,7 @@ Aplikacija koristi **Dapper ORM** za brzu i efikasnu komunikaciju s SQL Server b
 ## Slike i Vizualni Prikazi
 
 ### Lista Partnera
-![Lista Partnera](Slike/Lista%20partnera.png)
+![Lista Partnera](Slike/Lista%20Partnera.png)
 
 
 ### Unos Novog Partnera
