@@ -18,13 +18,14 @@ Aplikacija koristi **Dapper ORM** za brzu i efikasnu komunikaciju s SQL Server b
 ## Slike i Vizualni Prikazi
 
 ### Lista Partnera
+![Lista Partnera](Slike/Lista%20partnera.png)
 
 
 ### Unos Novog Partnera
-
+![Unos Novog Partnera](Slike/Unos%20Novog%20Partnera.png)
 
 ### Unos Police
-
+![Unos Police](Slike/Unos%20Nove%20Police%20Osiguranja.png)
 
 ---
 
